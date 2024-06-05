@@ -15,19 +15,19 @@ const { readFileSync } = require("fs");
 
 describe("messing around", () => {
   let db;
-  // let exampleDb;
+  let exampleDb;
 
   beforeAll(async () => {
     await clearDb();
     db = await getDbInstance("./data/test.db");
-    // exampleDb = await getDbInstance("./data/example.db");
+    exampleDb = await getDbInstance("./data/example.db");
 
-    // for local development of the exercise this can be extremely useful
-    // await runQueries(exampleDb, "schema.sql")
-    //   .then(() => {
-    //     console.log("created users table on example db");
-    //   })
-    //   .catch((err) => console.error(err));
+    //for local development of the exercise this can be extremely useful
+    await runQueries(exampleDb, "part1.sql")
+      .then(() => {
+        console.log("created users table on example db");
+      })
+      .catch((err) => console.error(err));
   });
 
   it("the file at 'data/main.db' should exist", () => {
@@ -176,7 +176,7 @@ describe("messing around", () => {
             normalizeLine(line).includes("unique(dog_id, user_id)")
           );
         })
-      ).toBe(true);
+      ).toBe(true); //change to false?
     });
 
     it("should have a favorite that connects peter to DOOMSLAYER", async () => {
